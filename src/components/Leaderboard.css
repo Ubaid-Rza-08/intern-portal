@@ -1,0 +1,24 @@
+.leaderboard-page {
+  background: #fff;
+  max-width: 400px;
+  margin: 60px auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 15px #2221;
+  padding: 28px 30px;
+  text-align: center;
+}
+.leaderboard-page ol {
+  padding-left: 21px;
+  margin-top: 15px;
+  text-align: left;
+}
+.back-btn {
+  display: inline-block;
+  margin-top: 24px;
+  padding: 7px 20px;
+  background: #6e35e1;
+  color: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+}

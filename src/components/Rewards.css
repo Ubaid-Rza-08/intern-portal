@@ -1,0 +1,15 @@
+.rewards-section {
+  margin-top: 28px;
+  padding: 20px 0 4px;
+  background: #f5f7fb;
+  border-radius: 6px;
+}
+.rewards-section ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.rewards-section li {
+  margin: 9px 0;
+  font-size: 15.5px;
+}
