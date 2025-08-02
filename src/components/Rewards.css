@@ -1,15 +1,99 @@
 .rewards-section {
-  margin-top: 28px;
-  padding: 20px 0 4px;
-  background: #f5f7fb;
-  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 30px;
+  margin-bottom: 30px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
 }
-.rewards-section ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+
+.rewards-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 25px;
 }
-.rewards-section li {
-  margin: 9px 0;
-  font-size: 15.5px;
+
+.rewards-icon {
+  font-size: 28px;
+  animation: pulse-scale 2s infinite;
+}
+
+@keyframes pulse-scale {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.rewards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.reward-card {
+  position: relative;
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  overflow: hidden;
+}
+
+.reward-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  border-color: var(--accent-color, #667eea);
+}
+
+.reward-icon {
+  font-size: 40px;
+  margin-bottom: 16px;
+  display: block;
+  animation: float-reward 3s ease-in-out infinite;
+}
+
+@keyframes float-reward {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+}
+
+.reward-info h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+
+.reward-amount {
+  font-size: 14px;
+  font-weight: 500;
+  color: #667eea;
+}
+
+.reward-glow {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, var(--accent-color, #667eea) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.reward-card:hover .reward-glow {
+  opacity: 0.1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .rewards-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
 }
