@@ -13,7 +13,7 @@ public class Intern {
 
 
 
-    public Intern(String name, String referralCode, int score) {
+    public Intern(String name, String referralCode, int donationsRaised) {
         this.name = name;
         this.referralCode = referralCode;
         this.donationsRaised = donationsRaised;
