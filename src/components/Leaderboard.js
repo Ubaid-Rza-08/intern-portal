@@ -10,7 +10,7 @@ export default function Leaderboard() {
 
   useEffect(() => {
     setIsLoading(true);
-    axios.get("http://localhost:8080/api/leaderboard")
+    axios.get("https://intern-portal-backend-deploy.onrender.com/api/leaderboard")
       .then(res => {
         setRows(res.data);
         setIsLoading(false);

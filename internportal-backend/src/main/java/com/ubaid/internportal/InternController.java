@@ -1,18 +1,16 @@
 package com.ubaid.internportal;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
+@RequestMapping("/api")
 public class InternController {
 
-    @GetMapping("/api/intern-dashboard")
+    @GetMapping("/intern-dashboard")
     public Intern getDashboard(@RequestParam(defaultValue = "Jane Doe") String name) {
 
         String referralCode = name.toLowerCase().replaceAll("\\s", "") + "2025";
@@ -20,7 +18,7 @@ public class InternController {
         return new Intern(name, referralCode, donations);
     }
 
-    @GetMapping("/api/leaderboard")
+    @GetMapping("/leaderboard")
     public List<LeaderboardEntry> getLeaderboard() {
         return Arrays.asList(
                 new LeaderboardEntry("Jane Doe", 2350),

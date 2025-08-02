@@ -9,19 +9,35 @@ export default function Dashboard({ username }) {
   const [intern, setIntern] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [copyButtonText, setCopyButtonText] = useState('Copy');
+  const [error, setError] = useState(null);
 
   useEffect(() => {
+    // Reset state when username changes
+    setIntern(null);
     setIsLoading(true);
-    axios.get(`http://localhost:8080/api/intern-dashboard?name=${encodeURIComponent(username)}`)
+    setError(null);
+    
+    if (!username) {
+      setIsLoading(false);
+      setError("No username provided");
+      return;
+    }
+
+    console.log('Fetching data for username:', username);
+    
+    axios.get(`https://intern-portal-backend-deploy.onrender.com/api/intern-dashboard?name=${encodeURIComponent(username)}`)
       .then(res => {
+        console.log('Dashboard data received:', res.data);
         setIntern(res.data);
         setIsLoading(false);
+        setError(null);
       })
       .catch(err => {
         console.error('Error fetching dashboard data:', err);
+        setError(err.response?.data?.message || 'Failed to fetch dashboard data');
         setIsLoading(false);
       });
-  }, [username]);
+  }, [username]); // This ensures the effect runs when username changes
 
   const handleCopyReferralCode = async (e) => {
     e.preventDefault();
@@ -78,11 +94,20 @@ export default function Dashboard({ username }) {
     return <LoadingSpinner />;
   }
 
-  if (!intern) {
+  if (error || !intern) {
     return (
       <AnimatedBackground>
         <div className="dashboard-container">
-          <p>Failed to load dashboard data. Please try refreshing the page.</p>
+          <div className="error-message">
+            <h2>Unable to load dashboard</h2>
+            <p>{error || 'Failed to load dashboard data. Please try refreshing the page.'}</p>
+            <button 
+              onClick={() => window.location.reload()} 
+              className="modern-btn primary"
+            >
+              Refresh Page
+            </button>
+          </div>
         </div>
       </AnimatedBackground>
     );
@@ -128,13 +153,21 @@ export default function Dashboard({ username }) {
             <div className="stat-icon">💰</div>
             <div className="stat-content">
               <h3>Total Donations</h3>
-              <p className="stat-value animate-count">₹{(intern.donationsRaised || 0).toLocaleString()}</p>
+              <p className="stat-value animate-count" key={`donations-${username}-${intern.donationsRaised}`}>
+                ₹{(intern.donationsRaised || 0).toLocaleString('en-IN')}
+              </p>
               <div className="progress-bar">
                 <div
                   className="progress-fill"
-                  style={{ width: `${Math.min(((intern.donationsRaised || 0) / 50000) * 100, 100)}%` }}
+                  style={{ 
+                    width: `${Math.min(((intern.donationsRaised || 0) / 50000) * 100, 100)}%`,
+                    transition: 'width 0.5s ease-in-out'
+                  }}
                 ></div>
               </div>
+              <p className="progress-text">
+                {Math.min(((intern.donationsRaised || 0) / 50000) * 100, 100).toFixed(1)}% of ₹50,000 goal
+              </p>
             </div>
             <div className="stat-glow"></div>
           </div>

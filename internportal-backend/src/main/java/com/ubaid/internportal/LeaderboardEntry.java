@@ -2,7 +2,6 @@ package com.ubaid.internportal;
 
 import lombok.*;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
@@ -10,4 +9,10 @@ import lombok.*;
 public class LeaderboardEntry {
     private String name;
     private int donationsRaised;
+
+    public LeaderboardEntry(String name, int donationsRaised) {
+        this.name = name;
+        this.donationsRaised = donationsRaised;
+    }
+
 }
